@@ -13,7 +13,7 @@ class ResponseListModelImpl(val context: Context) : Repository {
     override suspend fun getListPosts(): List<ResponsePostsModel>? {
 
 
-        val response = RetrofitService.retrofit.create(PostsListApi::class.java).getList()
+        val response = RetrofitService(context).retrofit.create(PostsListApi::class.java).getList()
 
 
         if (response.isSuccessful && response.body() != null) {

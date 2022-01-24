@@ -10,26 +10,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eddy.myapplication.viewModel.MainViewModel
 import com.eddy.myapplication.R
-import com.eddy.myapplication.entity.ResponseData
+import com.eddy.myapplication.entity.ResponsePostsModel
 import com.eddy.myapplication.ui.posts.adapter.PostsAdapter
-import com.eddy.myapplication.ui.posts.viewHolder.PostsViewHolder
-import org.koin.android.viewmodel.ext.android.viewModel
+import com.eddy.myapplication.ui.users.UsersFragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class PostsFragment : Fragment() {
 
     private val viewModel: MainViewModel by viewModel()
-    private val list = mutableListOf<ResponseData>()
-
-    lateinit var recyclerView: RecyclerView
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
         return inflater.inflate(R.layout.fragment_posts, container, false)
     }
 
@@ -37,20 +31,34 @@ class PostsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         getPostsList()
+        checkerClick()
+
+    }
+
+    private fun checkerClick(){
+        viewModel.clickCheckerLiveData.observe(viewLifecycleOwner,{
+            Log.d("lager","clicked in fragment $it")
+            requireActivity().supportFragmentManager
+                .beginTransaction()
+                .add(R.id.container,UsersFragment())
+
+        })
 
     }
 
     private fun getPostsList() {
 
-        viewModel.getListPosts(list = list)
+        viewModel.getListPosts()
         viewModel.listPostsLiveData.observe(viewLifecycleOwner, {
-            initRecycler(list)
+
+
+            initRecycler(it)
         })
     }
 
-    private fun initRecycler(listData: List<ResponseData>) {
+    private fun initRecycler(listData: List<ResponsePostsModel>) {
         val recyclerView = view?.findViewById<RecyclerView>(R.id.recycler)
-        recyclerView?.adapter = PostsAdapter(requireContext(), listData)
+        recyclerView?.adapter = PostsAdapter(requireContext(), listData,viewModel)
         recyclerView?.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 

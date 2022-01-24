@@ -4,7 +4,8 @@ import android.app.Application
 import com.eddy.myapplication.viewModel.MainViewModel
 
 import org.koin.android.ext.koin.androidContext
-import org.koin.android.viewmodel.dsl.viewModel
+
+import org.koin.androidx.viewmodel.dsl.viewModel
 
 
 import org.koin.core.context.startKoin

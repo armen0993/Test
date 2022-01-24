@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.eddy.myapplication.Repository
 import com.eddy.myapplication.entity.ResponseData
+import com.eddy.myapplication.entity.ResponsePostsModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -14,27 +15,25 @@ import kotlinx.coroutines.launch
  */
 class MainViewModel(val repository: Repository) : ViewModel() {
 
-    private val _listPostsLiveData: MutableLiveData<List<ResponseData>> = MutableLiveData()
+    private val _listPostsLiveData: MutableLiveData<List<ResponsePostsModel>> = MutableLiveData()
 
-    val listPostsLiveData: LiveData<List<ResponseData>> = _listPostsLiveData
+    val listPostsLiveData: LiveData<List<ResponsePostsModel>> = _listPostsLiveData
 
-    fun getListPosts(list:MutableList<ResponseData>) {
+    fun getListPosts() {
         viewModelScope.launch(Dispatchers.IO) {
 
             val response = repository.getListPosts()
 
 
-            if (response != null) {
-                for (i in response.indices) {
-
-                list.add(i,ResponseData(response[i].title.toString(),response[i].body.toString()))
-
-
-                }
-            }
-
-            _listPostsLiveData.postValue(list)
+            _listPostsLiveData.postValue(response)
 
         }
+    }
+
+    private val _clickCheckerLiveData:MutableLiveData<Boolean> = MutableLiveData()
+    val clickCheckerLiveData:LiveData<Boolean> = _clickCheckerLiveData
+
+    fun getClick(clicked:Boolean){
+        _clickCheckerLiveData.postValue(clicked)
     }
 }
