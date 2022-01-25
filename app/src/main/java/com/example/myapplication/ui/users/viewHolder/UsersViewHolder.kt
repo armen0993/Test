@@ -1,4 +1,4 @@
-package com.eddy.myapplication.ui.users.viewHolder
+package com.example.myapplication.ui.users.viewHolder
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

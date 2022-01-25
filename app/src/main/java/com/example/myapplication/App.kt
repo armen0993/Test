@@ -1,7 +1,7 @@
-package com.eddy.myapplication
+package com.example.myapplication
 
 import android.app.Application
-import com.eddy.myapplication.viewModel.MainViewModel
+import com.example.myapplication.viewModel.MainViewModel
 
 import org.koin.android.ext.koin.androidContext
 

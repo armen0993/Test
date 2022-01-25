@@ -1,21 +1,17 @@
-package com.eddy.myapplication.ui.posts.adapter
+package com.example.myapplication.ui.posts.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.eddy.myapplication.R
-import com.eddy.myapplication.entity.ResponseData
-import com.eddy.myapplication.entity.ResponsePostsModel
-import com.eddy.myapplication.ui.posts.viewHolder.PostsViewHolder
-import com.eddy.myapplication.viewModel.MainViewModel
+import com.example.myapplication.entity.ResponsePostsModel
+import com.example.myapplication.ui.posts.viewHolder.PostsViewHolder
+import com.example.myapplication.viewModel.MainViewModel
 
-/**
- * Created by Eddy MiGoder on 1/22/2022
- */
 class PostsAdapter(private val context: Context, private val listData: List<ResponsePostsModel>,
-                   private val viewModel: MainViewModel) :
+                   private val viewModel: MainViewModel
+) :
     RecyclerView.Adapter<PostsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostsViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_posts, parent, false)

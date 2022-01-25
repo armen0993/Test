@@ -1,4 +1,4 @@
-package com.eddy.myapplication.retrofit
+package com.example.myapplication.retrofit
 
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerCollector
@@ -7,9 +7,6 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-/**
- * Created by Eddy MiGoder on 1/22/2022
- */
 class RetrofitService(private val context: Context) {
 
     val retrofit = Retrofit.Builder()
